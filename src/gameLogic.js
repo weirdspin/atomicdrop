@@ -113,10 +113,8 @@ const MULTIPLIERS = {
  * @returns {number[]} An array of multipliers for the `rows + 1` buckets.
  */
 export function calculateMultipliers(rows, riskLevel) {
-  const houseEdge = 0.01; // 1% house edge
-  
   if (MULTIPLIERS[riskLevel] && MULTIPLIERS[riskLevel][rows]) {
-      return MULTIPLIERS[riskLevel][rows].map(m => m * (1 - houseEdge));
+      return MULTIPLIERS[riskLevel][rows];
   }
 
   // Fallback for unsupported row counts, though the UI should prevent this.
@@ -144,7 +142,7 @@ export function calculateMultipliers(rows, riskLevel) {
         multipliers.push(0);
         continue;
       }
-      const multiplier = (1 / probability) * (1 - houseEdge);
+      const multiplier = 1 / probability;
       multipliers.push(multiplier);
   }
 

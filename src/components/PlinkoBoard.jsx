@@ -10,11 +10,11 @@ const PlinkoBoard = ({ rows, path, multipliers = [] }) => {
       const PEG_DIAMETER = 10;
       const PEG_MARGIN = 20; // This is 10px on each side
       const PEG_ROW_HEIGHT = 25; // 10px peg height + 15px margin-bottom
-      const STARTING_OFFSET_Y = 20; // Initial vertical position
+      const STARTING_OFFSET_Y = 40; // Initial vertical position
 
       const PEG_SPACING_X = PEG_DIAMETER + PEG_MARGIN;
 
-      let keyframes = `@keyframes drop-animation { 0% { transform: translate(0, 0); }`;
+      let keyframes = `@keyframes drop-animation { 0% { transform: translate(0, 0); opacity: 1; }`;
 
       let currentX = 0;
       let currentY = STARTING_OFFSET_Y;
@@ -30,8 +30,8 @@ const PlinkoBoard = ({ rows, path, multipliers = [] }) => {
         keyframes += `${stepPercentage}% { transform: translate(${currentX}px, ${currentY}px); }`;
       });
 
-      keyframes += `100% { transform: translate(${currentX}px, ${currentY + 20}px); opacity: 0; }`; // Final drop into bucket
-      keyframes += `}`;
+      keyframes += `100% { transform: translate(${currentX}px, ${currentY + 20}px); }`; // Final drop into bucket
+      keyframes += `}`;;
       
       setAnimationStyle(keyframes);
     } else {
@@ -43,7 +43,7 @@ const PlinkoBoard = ({ rows, path, multipliers = [] }) => {
     let pegs = [];
     for (let i = 0; i < rows; i++) {
       let rowPegs = [];
-      for (let j = 0; j <= i; j++) {
+      for (let j = 0; j <= i + 2; j++) {
         rowPegs.push(<div key={`${i}-${j}`} className="peg"></div>);
       }
       pegs.push(<div key={i} className="peg-row" style={{ marginTop: `${i === 0 ? 30 : 15}px` }}>{rowPegs}</div>);
@@ -54,11 +54,19 @@ const PlinkoBoard = ({ rows, path, multipliers = [] }) => {
   const renderMultipliers = () => {
     return (
       <div className="multipliers-row">
-        {multipliers.map((multiplier, index) => (
-          <div key={index} className="multiplier-slot">
-            {multiplier.toFixed(2)}x
-          </div>
-        ))}
+        {multipliers.map((multiplier, index) => {
+          let formattedMultiplier;
+          if (Number.isInteger(multiplier)) {
+            formattedMultiplier = multiplier.toFixed(0); // Display as integer
+          } else {
+            formattedMultiplier = multiplier.toFixed(1); // Display with one decimal
+          }
+          return (
+            <div key={index} className="multiplier-slot">
+              {formattedMultiplier}
+            </div>
+          );
+        })}
       </div>
     );
   };
