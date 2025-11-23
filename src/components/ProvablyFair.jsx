@@ -1,4 +1,5 @@
 import React from 'react';
+import './ProvablyFair.css';
 
 const ProvablyFair = ({ serverSeed, clientSeed, nonce }) => {
   return (

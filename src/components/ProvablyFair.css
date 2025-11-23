@@ -1,0 +1,22 @@
+.provably-fair {
+    background-color: #3e4451;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.provably-fair h2 {
+    color: #61dafb;
+    margin-bottom: 15px;
+}
+
+.provably-fair p {
+    color: #f8f8f2;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    word-wrap: break-word; /* Ensure long seeds wrap */
+}
+
+.provably-fair p strong {
+    color: #61dafb;
+}

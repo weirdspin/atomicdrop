@@ -1,4 +1,5 @@
 import React from 'react';
+import './GameHistory.css';
 
 const GameHistory = ({ history }) => {
   return (

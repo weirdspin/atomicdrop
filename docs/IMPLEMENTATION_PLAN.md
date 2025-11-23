@@ -40,22 +40,22 @@ With the logic defined, set up the React application structure.
     *   `components/ProvablyFair.jsx` ✅ Done
 4.  **Layout:** Implement the basic three-column CSS grid or flexbox layout in `App.css`. ✅ Done
 
-## Phase 3: Component Implementation - ❌ Pending
+## Phase 3: Component Implementation - ✅ Done
 
 Build out the individual React components.
 
-1.  **`BetControls.jsx`:** ❌ Pending
-    *   Create the form with inputs for bet amount, a select dropdown for risk level, and a range slider for the number of rows. ❌ Pending
-    *   Pass state values and setter functions from `App.jsx` as props. ❌ Pending
-    *   Implement the "Bet" button, which will call the main game execution function in `App.jsx`. ❌ Pending
+1.  **`BetControls.jsx`:** ✅ Done
+    *   Create the form with inputs for bet amount, a select dropdown for risk level, and a range slider for the number of rows. ✅ Done
+    *   Pass state values and setter functions from `App.jsx` as props. ✅ Done
+    *   Implement the "Bet" button, which will call the main game execution function in `App.jsx`. ✅ Done
 
-2.  **`PlinkoBoard.jsx`:** ❌ Pending
-    *   Render the pegs in a pyramid formation using CSS, dynamically based on the `rows` prop. ❌ Pending
-    *   Render the `multipliers` array at the bottom of the pyramid. ❌ Pending
-    *   Create the ball element. Its animation path will be determined later. ❌ Pending
+2.  **`PlinkoBoard.jsx`:** ✅ Done
+    *   Render the pegs in a pyramid formation using CSS, dynamically based on the `rows` prop. ✅ Done
+    *   Render the `multipliers` array at the bottom of the pyramid. ✅ Done
+    *   Create the ball element. Its animation path will be determined later. ✅ Done
 
-3.  **`GameHistory.jsx` & `ProvablyFair.jsx`:** ❌ Pending
-    *   Build these components to display the game history and the seed information, respectively. Their structure can be heavily based on the Quantum Dice project. ❌ Pending
+3.  **`GameHistory.jsx` & `ProvablyFair.jsx`:** ✅ Done
+    *   Build these components to display the game history and the seed information, respectively. Their structure can be heavily based on the Quantum Dice project. ✅ Done
 
 ## Phase 4: Integration & Animation - ❌ Pending
 

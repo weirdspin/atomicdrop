@@ -1,0 +1,84 @@
+.plinko-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #3e4451;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden; /* Ensure ball stays within bounds if it moves out initially */
+    min-height: 500px; /* Adjust as needed */
+}
+
+.pegs-container {
+    margin-top: 20px; /* Space for the ball to drop from */
+    margin-bottom: 20px;
+}
+
+.peg-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px; /* Spacing between rows */
+}
+
+.peg-row:not(:last-child) {
+    /* Adjust spacing dynamically to create a pyramid effect */
+    /* This can be refined with more advanced CSS or absolute positioning */
+}
+
+.peg {
+    width: 10px;
+    height: 10px;
+    background-color: #f8f8f2;
+    border-radius: 50%;
+    margin: 0 10px; /* Spacing between pegs in a row */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.multipliers-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Occupy full width to align with peg-base */
+    padding: 10px 0;
+    background-color: #282c34;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.multiplier-slot {
+    flex-grow: 1;
+    text-align: center;
+    padding: 5px 0;
+    color: #f8f8f2;
+    font-weight: bold;
+    font-size: 0.9em;
+    border-right: 1px solid #555; /* Separator between slots */
+}
+
+.multiplier-slot:last-child {
+    border-right: none;
+}
+
+.ball-container {
+    position: absolute;
+    top: 10px; /* Starting position for the ball */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px; /* Size of the ball container */
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.plinko-ball {
+    width: 18px;
+    height: 18px;
+    background-color: #61dafb;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(97, 218, 251, 0.8);
+    position: absolute;
+}
