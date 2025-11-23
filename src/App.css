@@ -1,53 +1,11 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* New styles for Plinko game layout */
+/* General App Layout */
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Full viewport height */
-  background-color: #282c34; /* Dark background */
+  min-height: 100vh;
+  background-color: #282c34;
   color: white;
+  text-align: center;
 }
 
 .App-header {
@@ -58,10 +16,13 @@
 
 .game-container {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* Three columns: controls, board, info */
+  grid-template-columns: 1fr 2fr 1fr; /* Three columns on desktop */
   gap: 20px;
   padding: 20px;
-  flex-grow: 1; /* Allows container to take up remaining space */
+  flex-grow: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .game-column {
@@ -71,19 +32,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.controls-column {
-  /* Specific styles for controls if needed */
-}
-
 .board-column {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Specific styles for plinko board */
-}
-
-.info-column {
-  /* Specific styles for game history and provably fair */
 }
 
 h1, h2 {
@@ -101,4 +53,12 @@ li {
   padding: 8px;
   border-radius: 4px;
   text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .game-container {
+    grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    padding: 10px;
+  }
 }

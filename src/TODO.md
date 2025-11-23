@@ -1,0 +1,1 @@
+1) fix bug: the ball increases opacity when being dropped down but should be fully visible the whole time

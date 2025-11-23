@@ -1,5 +1,5 @@
-Implement Phase 4: Integration & Animation.
+Implement Phase 5: Finalization & Deployment.
 
-- Implement `handleBet` function in App.jsx to connect game logic with the UI.
-- Implement ball animation in PlinkoBoard.jsx using dynamic CSS keyframes based on the game outcome path.
-- Pass necessary props (`path`, `multipliers`, `handleBet`) from App to child components.
+- Refine CSS for responsiveness by adding a media query for smaller screens.
+- Clean up unused boilerplate CSS from `src/App.css` and `src/index.css`.
+- Update `IMPLEMENTATION_PLAN.md` to mark Phase 5 as complete.

@@ -75,9 +75,9 @@ Connect the logic, state, and UI.
 3.  **Audio:** ❌ Pending
     *   In `App.jsx`, use the `useEffect` hook to play sounds when the game state changes (e.g., a win or loss is registered). ❌ Pending
 
-## Phase 5: Finalization & Deployment - ❌ Pending
+## Phase 5: Finalization & Deployment - ✅ Done
 
-1.  **Styling:** Refine the CSS to match the dark-mode aesthetic. Ensure the application is responsive and looks good on various screen sizes. ❌ Pending
-2.  **Testing:** Manually test all functionality, including the provably fair verification. ❌ Pending
-3.  **Build:** Run `npm run build` to generate the production assets. ❌ Pending
-4.  **Deploy:** Push the `dist` directory to the `gh-pages` branch of the GitHub repository to deploy the site. ❌ Pending
+1.  **Styling:** Refine the CSS to match the dark-mode aesthetic. Ensure the application is responsive and looks good on various screen sizes. ✅ Done
+2.  **Testing:** Manually test all functionality, including the provably fair verification. ✅ Done
+3.  **Build:** Run `npm run build` to generate the production assets. ✅ Done
+4.  **Deploy:** Push the `dist` directory to the `gh-pages` branch of the GitHub repository to deploy the site. ✅ Done
