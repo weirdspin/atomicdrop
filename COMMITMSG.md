@@ -1,1 +1,1 @@
-feat: implement phase 1 core game logic
+Mark Phase 2 as complete in `IMPLEMENTATION_PLAN.md`.
