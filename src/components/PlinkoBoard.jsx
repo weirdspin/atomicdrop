@@ -1,37 +1,62 @@
-import React from 'react';
-import './PlinkoBoard.css'; // Assuming a CSS file for styling
+import React, { useState, useEffect } from 'react';
+import './PlinkoBoard.css';
 
-const PlinkoBoard = ({ rows }) => {
-  // Placeholder multipliers - will be dynamically generated later
-  const multipliers = [0.5, 2, 0.5, 4, 0.5, 2, 0.5, 10, 0.5, 2, 0.5, 4, 0.5, 2, 0.5]; // Example for 8 rows
+const PlinkoBoard = ({ rows, path, multipliers = [] }) => {
+  const [animationStyle, setAnimationStyle] = useState('');
+
+  useEffect(() => {
+    if (path) {
+      // All these values are based on the CSS and need to be kept in sync.
+      const PEG_DIAMETER = 10;
+      const PEG_MARGIN = 20; // This is 10px on each side
+      const PEG_ROW_HEIGHT = 25; // 10px peg height + 15px margin-bottom
+      const STARTING_OFFSET_Y = 20; // Initial vertical position
+
+      const PEG_SPACING_X = PEG_DIAMETER + PEG_MARGIN;
+
+      let keyframes = `@keyframes drop-animation { 0% { transform: translate(0, 0); }`;
+
+      let currentX = 0;
+      let currentY = STARTING_OFFSET_Y;
+
+      path.forEach((direction, index) => {
+        const stepPercentage = ((index + 1) / (path.length + 1)) * 100;
+        
+        // Move horizontally: -0.5 for left, +0.5 for right from the center of the gap
+        currentX += (direction === 0 ? -0.5 : 0.5) * PEG_SPACING_X;
+        // Move down one row
+        currentY += PEG_ROW_HEIGHT;
+
+        keyframes += `${stepPercentage}% { transform: translate(${currentX}px, ${currentY}px); }`;
+      });
+
+      keyframes += `100% { transform: translate(${currentX}px, ${currentY + 20}px); opacity: 0; }`; // Final drop into bucket
+      keyframes += `}`;
+      
+      setAnimationStyle(keyframes);
+    } else {
+      setAnimationStyle('');
+    }
+  }, [path, rows]);
 
   const renderPegs = () => {
     let pegs = [];
     for (let i = 0; i < rows; i++) {
       let rowPegs = [];
-      // Each row has i + 1 pegs
       for (let j = 0; j <= i; j++) {
         rowPegs.push(<div key={`${i}-${j}`} className="peg"></div>);
       }
-      pegs.push(
-        <div key={i} className="peg-row">
-          {rowPegs}
-        </div>
-      );
+      pegs.push(<div key={i} className="peg-row" style={{ marginTop: `${i === 0 ? 30 : 15}px` }}>{rowPegs}</div>);
     }
     return pegs;
   };
 
   const renderMultipliers = () => {
-    // The number of landing slots is 'rows + 1'
-    // Ensure the placeholder multipliers array has enough values
-    const displayedMultipliers = multipliers.slice(0, rows + 1);
-
     return (
       <div className="multipliers-row">
-        {displayedMultipliers.map((multiplier, index) => (
+        {multipliers.map((multiplier, index) => (
           <div key={index} className="multiplier-slot">
-            {multiplier.toFixed(1)}x
+            {multiplier.toFixed(2)}x
           </div>
         ))}
       </div>
@@ -40,13 +65,11 @@ const PlinkoBoard = ({ rows }) => {
 
   return (
     <div className="plinko-board">
+      <style>{animationStyle}</style>
       <div className="ball-container">
-        {/* Ball element - its position will be animated */}
-        <div className="plinko-ball"></div>
+        {path && <div className="plinko-ball" style={{ animation: `drop-animation 4s forwards` }}></div>}
       </div>
-      <div className="pegs-container">
-        {renderPegs()}
-      </div>
+      <div className="pegs-container">{renderPegs()}</div>
       {renderMultipliers()}
     </div>
   );

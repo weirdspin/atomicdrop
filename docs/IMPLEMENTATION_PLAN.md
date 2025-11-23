@@ -57,20 +57,20 @@ Build out the individual React components.
 3.  **`GameHistory.jsx` & `ProvablyFair.jsx`:** ✅ Done
     *   Build these components to display the game history and the seed information, respectively. Their structure can be heavily based on the Quantum Dice project. ✅ Done
 
-## Phase 4: Integration & Animation - ❌ Pending
+## Phase 4: Integration & Animation - ✅ Done
 
 Connect the logic, state, and UI.
 
-1.  **Main Game Function:** In `App.jsx`, create the `handleBet` function. This function will: ❌ Pending
-    *   Call `getPlinkoOutcome` from `gameLogic.js` to get the result (final slot and multiplier). ❌ Pending
-    *   Calculate the win/loss amount and update the `balance` state. ❌ Pending
-    *   Add the new result object to the `gameHistory` state. ❌ Pending
-    *   Increment the `nonce`. ❌ Pending
-    *   Pass the calculated path (the series of left/right moves) as a prop to the `PlinkoBoard` component. ❌ Pending
+1.  **Main Game Function:** In `App.jsx`, create the `handleBet` function. This function will: ✅ Done
+    *   Call `getPlinkoOutcome` from `gameLogic.js` to get the result (final slot and multiplier). ✅ Done
+    *   Calculate the win/loss amount and update the `balance` state. ✅ Done
+    *   Add the new result object to the `gameHistory` state. ✅ Done
+    *   Increment the `nonce`. ✅ Done
+    *   Pass the calculated path (the series of left/right moves) as a prop to the `PlinkoBoard` component. ✅ Done
 
-2.  **Animation:** ❌ Pending
-    *   In `PlinkoBoard.jsx`, use the path prop to animate the ball. ❌ Pending
-    *   This can be achieved by creating a series of CSS keyframe animations or by using a library like `react-spring` to dynamically update the ball's `transform: translate(x, y)` style. The path determines the `x` translation at each `y` step (row). ❌ Pending
+2.  **Animation:** ✅ Done
+    *   In `PlinkoBoard.jsx`, use the path prop to animate the ball. ✅ Done
+    *   This can be achieved by creating a series of CSS keyframe animations or by using a library like `react-spring` to dynamically update the ball's `transform: translate(x, y)` style. The path determines the `x` translation at each `y` step (row). ✅ Done
 
 3.  **Audio:** ❌ Pending
     *   In `App.jsx`, use the `useEffect` hook to play sounds when the game state changes (e.g., a win or loss is registered). ❌ Pending

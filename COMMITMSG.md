@@ -1,6 +1,5 @@
-Implement Phase 3: Component Implementation.
+Implement Phase 4: Integration & Animation.
 
-- Implement BetControls component with input fields and a bet button.
-- Implement PlinkoBoard component to render pegs and multipliers.
-- Implement GameHistory and ProvablyFair components.
-- Create dedicated CSS files for all new components.
+- Implement `handleBet` function in App.jsx to connect game logic with the UI.
+- Implement ball animation in PlinkoBoard.jsx using dynamic CSS keyframes based on the game outcome path.
+- Pass necessary props (`path`, `multipliers`, `handleBet`) from App to child components.
