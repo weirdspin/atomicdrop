@@ -10,7 +10,6 @@ function App() {
   const [balance, setBalance] = useState(1000);
   const [betAmount, setBetAmount] = useState(1);
   const [rows, setRows] = useState(8);
-  const [riskLevel, setRiskLevel] = useState('medium'); // 'low', 'medium', 'high'
   const [serverSeed, setServerSeed] = useState('');
   const [clientSeed, setClientSeed] = useState('initialClientSeed'); // Placeholder
   const [nonce, setNonce] = useState(0);
@@ -22,9 +21,10 @@ function App() {
   useEffect(() => {
     // Generate an initial server seed when the app loads
     generateServerSeed().then(setServerSeed);
-    // Calculate multipliers whenever rows or risk level changes
-    setMultipliers(calculateMultipliers(rows, riskLevel));
-  }, [rows, riskLevel]);
+    generateServerSeed().then(setServerSeed);
+    // Calculate multipliers whenever rows changes
+    setMultipliers(calculateMultipliers(rows));
+  }, [rows]);
 
 
   const handleBet = async () => {
@@ -36,9 +36,15 @@ function App() {
     const { path: ballPath, bucket } = await getPlinkoOutcome(serverSeed, clientSeed, nonce, rows);
     setPath(ballPath);
 
-    const currentMultipliers = calculateMultipliers(rows, riskLevel);
+    setPath(ballPath);
+
+    const currentMultipliers = calculateMultipliers(rows);
     const multiplier = currentMultipliers[bucket];
     const winAmount = betAmount * multiplier;
+
+    // Calculate animation duration based on rows to ensure constant speed
+    const DROP_TIME_PER_ROW = 250; // ms per row
+    const animationDuration = rows * DROP_TIME_PER_ROW;
 
     // Simulate animation time before updating results
     setTimeout(() => {
@@ -58,7 +64,7 @@ function App() {
       // generateServerSeed().then(setServerSeed);
       setIsBetting(false);
       setPath(null); // Reset path after animation
-    }, 4000); // Wait for animation to finish (adjust timing as needed)
+    }, animationDuration); // Wait for animation to finish
   };
 
 
@@ -74,8 +80,6 @@ function App() {
             setBetAmount={setBetAmount}
             rows={rows}
             setRows={setRows}
-            riskLevel={riskLevel}
-            setRiskLevel={setRiskLevel}
             balance={balance}
             isBetting={isBetting}
             handleBet={handleBet}

@@ -6,8 +6,6 @@ const BetControls = ({
   setBetAmount,
   rows,
   setRows,
-  riskLevel,
-  setRiskLevel,
   balance,
   isBetting,
   handleBet, // This function will be passed from App.jsx later
@@ -21,10 +19,6 @@ const BetControls = ({
 
   const handleRowsChange = (e) => {
     setRows(parseInt(e.target.value, 10));
-  };
-
-  const handleRiskLevelChange = (e) => {
-    setRiskLevel(e.target.value);
   };
 
   return (
@@ -62,19 +56,7 @@ const BetControls = ({
         <span>{rows}</span>
       </div>
 
-      <div className="control-group">
-        <label htmlFor="riskLevel">Risk Level:</label>
-        <select
-          id="riskLevel"
-          value={riskLevel}
-          onChange={handleRiskLevelChange}
-          disabled={isBetting}
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
+
 
       <button onClick={handleBet} disabled={isBetting || betAmount <= 0 || betAmount > balance}>
         {isBetting ? 'Dropping...' : 'Drop Ball'}

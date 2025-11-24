@@ -9,11 +9,14 @@ const GameHistory = ({ history }) => {
         <p>No games played yet.</p>
       ) : (
         <ul>
-          {history.map((game, index) => (
-            <li key={index}>
-              Bet: {game.bet}, Outcome: {game.outcome}, Win: {game.winAmount}
-            </li>
-          ))}
+          {history.map((game, index) => {
+            const formatNumber = (num) => parseFloat(Number(num).toFixed(1));
+            return (
+              <li key={index}>
+                Bet: {game.bet}, Outcome: {formatNumber(game.outcome)}, Win: {formatNumber(game.winAmount)}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

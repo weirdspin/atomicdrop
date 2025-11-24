@@ -1,0 +1,1 @@
+bumpers need an animation when they are hit

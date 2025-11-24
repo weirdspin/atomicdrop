@@ -88,62 +88,55 @@ export async function getPlinkoOutcome(serverSeed, clientSeed, nonce, rows) {
 // Since the exact formula for risk is not defined, we use a standard lookup table
 // which is common practice for Plinko games. This provides clear, predictable payout structures.
 const MULTIPLIERS = {
-  low: {
-    8: [1.1, 1, 0.9, 0.8, 0.7, 0.8, 0.9, 1, 1.1],
-    16: [1.2, 1.1, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2],
-  },
-  medium: {
-    8: [5.6, 2.1, 1.1, 1, 0.5, 1, 1.1, 2.1, 5.6],
-    16: [29, 9, 4, 2, 1.4, 1.1, 1, 0.5, 0.3, 0.5, 1, 1.1, 1.4, 2, 4, 9, 29],
-  },
-  high: {
-    8: [29, 4, 1.5, 0.3, 0.1, 0.3, 1.5, 4, 29],
-    16: [1000, 130, 26, 9, 4, 2, 0.2, 0.2, 0.2, 0.2, 0.2, 2, 4, 9, 26, 130, 1000],
-  }
+  8: [13, 3, 1.3, 0.7, 0.4, 0.7, 1.3, 3, 13],
+  9: [18, 4, 1.7, 0.9, 0.5, 0.5, 0.9, 1.7, 4, 18],
+  10: [22, 5, 2, 1.4, 0.6, 0.4, 0.6, 1.4, 2, 5, 22],
+  11: [24, 6, 3, 1.8, 0.7, 0.5, 0.5, 0.7, 1.8, 3, 6, 24],
+  12: [33, 11, 4, 2, 1.1, 0.6, 0.3, 0.6, 1.1, 2, 4, 11, 33],
+  13: [43, 13, 6, 3, 1.3, 0.7, 0.4, 0.4, 0.7, 1.3, 3, 6, 13, 43],
+  14: [58, 15, 7, 4, 1.9, 1, 0.5, 0.2, 0.5, 1, 1.9, 4, 7, 15, 58],
+  15: [88, 18, 11, 5, 3, 1.3, 0.5, 0.3, 0.3, 0.5, 1.3, 3, 5, 11, 18, 88],
+  16: [110, 41, 10, 5, 3, 1.5, 1, 0.5, 0.3, 0.5, 1, 1.5, 3, 5, 10, 41, 110]
 };
 
 
 /**
  * Calculates the payout multipliers for each slot.
- * In a real-world scenario, these are carefully balanced and often pre-defined.
- * The probabilities follow a binomial distribution, but multipliers are adjusted for gameplay and house edge.
  *
  * @param {number} rows - The number of rows in the pyramid.
- * @param {'low' | 'medium' | 'high'} riskLevel - The chosen risk level.
  * @returns {number[]} An array of multipliers for the `rows + 1` buckets.
  */
-export function calculateMultipliers(rows, riskLevel) {
-  if (MULTIPLIERS[riskLevel] && MULTIPLIERS[riskLevel][rows]) {
-      return MULTIPLIERS[riskLevel][rows];
+export function calculateMultipliers(rows) {
+  if (MULTIPLIERS[rows]) {
+    return MULTIPLIERS[rows];
   }
 
   // Fallback for unsupported row counts, though the UI should prevent this.
-  // This basic calculation demonstrates the principle but isn't balanced for gameplay.
-  console.warn(`No predefined multipliers for ${rows} rows and ${riskLevel} risk. Using a fallback calculation.`);
+  console.warn(`No predefined multipliers for ${rows} rows. Using a fallback calculation.`);
   const multipliers = [];
   const n = rows;
   const totalOutcomes = Math.pow(2, n);
-  
+
   // Helper to calculate combinations (nCk)
   function combinations(n, k) {
-      if (k < 0 || k > n) return 0;
-      if (k === 0 || k === n) return 1;
-      if (k > n / 2) k = n - k;
-      let res = 1;
-      for (let i = 1; i <= k; i++) {
-          res = res * (n - i + 1) / i;
-      }
-      return Math.round(res);
+    if (k < 0 || k > n) return 0;
+    if (k === 0 || k === n) return 1;
+    if (k > n / 2) k = n - k;
+    let res = 1;
+    for (let i = 1; i <= k; i++) {
+      res = res * (n - i + 1) / i;
+    }
+    return Math.round(res);
   }
 
   for (let k = 0; k <= n; k++) {
-      const probability = combinations(n, k) / totalOutcomes;
-      if (probability === 0) {
-        multipliers.push(0);
-        continue;
-      }
-      const multiplier = 1 / probability;
-      multipliers.push(multiplier);
+    const probability = combinations(n, k) / totalOutcomes;
+    if (probability === 0) {
+      multipliers.push(0);
+      continue;
+    }
+    const multiplier = 1 / probability;
+    multipliers.push(multiplier);
   }
 
   return multipliers;
