@@ -17,7 +17,7 @@
 .pegs-container {
     margin-top: 20px;
     /* Space for the ball to drop from */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .peg-row {
@@ -27,7 +27,9 @@
     /* Spacing between rows */
 }
 
-
+.peg-row:last-child {
+    margin-bottom: 0;
+}
 
 .peg {
     width: 10px;
@@ -46,24 +48,35 @@
 
 .multipliers-row {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    /* Occupy full width to align with peg-base */
-    padding: 10px 0;
-    background-color: #282c34;
-    border-radius: 5px;
-    margin-top: 10px;
+    justify-content: center;
+    width: fit-content;
+    padding: 0;
+    background-color: transparent;
+    /* Removed background */
+    margin-top: 5px;
+    /* Small gap */
 }
 
 .multiplier-slot {
-    flex-grow: 1;
-    text-align: center;
+    width: 24px;
+    /* Reduced width to allow margin */
+    margin: 0 3px;
+    /* Total width 24 + 6 = 30px to maintain alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 5px 0;
     color: #f8f8f2;
     font-weight: bold;
-    font-size: 0.9em;
-    border-right: 1px solid #555;
-    /* Separator between slots */
+    font-size: 0.6em;
+    border-right: none;
+    /* background-color: #282c34;  Removed for dynamic gradient */
+    /* Background for individual item */
+    border-radius: 6px;
+    /* Semi-rounded borders */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 .multiplier-slot:last-child {

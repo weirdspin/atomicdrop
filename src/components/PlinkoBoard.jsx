@@ -370,15 +370,21 @@ const PlinkoBoard = ({ rows, path, multipliers = [] }) => {
     return (
       <div className="multipliers-row">
         {multipliers.map((multiplier, index) => {
-          let formattedMultiplier;
-          if (Number.isInteger(multiplier)) {
-            formattedMultiplier = multiplier.toFixed(0); // Display as integer
-          } else {
-            formattedMultiplier = multiplier.toFixed(1); // Display with one decimal
-          }
+          // Calculate color gradient: Red (0) at edges, Yellow (60) at center
+          const centerIndex = (multipliers.length - 1) / 2;
+          const distance = Math.abs(index - centerIndex);
+          const fraction = distance / centerIndex;
+          const hue = 60 * (1 - fraction);
+          const backgroundColor = `hsl(${hue}, 100%, 60%)`;
+          // Darker text for lighter backgrounds might be needed, but white usually works on these
+
           return (
-            <div key={index} className="multiplier-slot">
-              {formattedMultiplier}
+            <div
+              key={index}
+              className="multiplier-slot"
+              style={{ backgroundColor, boxShadow: `0 0 5px hsl(${hue}, 100%, 60%)` }}
+            >
+              {multiplier}x
             </div>
           );
         })}
