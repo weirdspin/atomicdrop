@@ -15,7 +15,7 @@ function App() {
   const [nonce, setNonce] = useState(0);
   const [gameHistory, setGameHistory] = useState([]);
   const [isBetting, setIsBetting] = useState(false);
-  const [path, setPath] = useState(null); // The path for the ball animation
+  const [balls, setBalls] = useState([]); // Array of active balls
   const [multipliers, setMultipliers] = useState([]);
 
   useEffect(() => {
@@ -28,15 +28,17 @@ function App() {
 
 
   const handleBet = async () => {
-    if (isBetting || betAmount > balance) return;
+    if (betAmount > balance) return;
 
     setIsBetting(true);
     setBalance(prev => prev - betAmount);
 
     const { path: ballPath, bucket } = await getPlinkoOutcome(serverSeed, clientSeed, nonce, rows);
-    setPath(ballPath);
 
-    setPath(ballPath);
+    const ballId = `ball_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const newBall = { id: ballId, path: ballPath, rows };
+
+    setBalls(prev => [...prev, newBall]);
 
     const currentMultipliers = calculateMultipliers(rows);
     const multiplier = currentMultipliers[bucket];
@@ -56,15 +58,19 @@ function App() {
         winAmount: winAmount,
         nonce: nonce,
       };
-      setGameHistory([newGameResult, ...gameHistory]);
+      setGameHistory(prev => [newGameResult, ...prev]);
 
       // Prepare for the next game
-      setNonce(prev => prev + 1);
       // In a real app, you would generate a new server seed and show its hash
       // generateServerSeed().then(setServerSeed);
-      setIsBetting(false);
-      setPath(null); // Reset path after animation
+
+      // Remove the ball from the board
+      setBalls(prev => prev.filter(ball => ball.id !== ballId));
+
+      setIsBetting(false); // This might need to be smarter if we want to track "any active bet"
     }, animationDuration); // Wait for animation to finish
+
+    setNonce(prev => prev + 1);
   };
 
 
@@ -81,14 +87,14 @@ function App() {
             rows={rows}
             setRows={setRows}
             balance={balance}
-            isBetting={isBetting}
+            isBetting={false} // Always allow betting
             handleBet={handleBet}
           />
         </div>
         <div className="game-column board-column">
           <PlinkoBoard
             rows={rows}
-            path={path}
+            balls={balls}
             multipliers={multipliers}
           />
         </div>
