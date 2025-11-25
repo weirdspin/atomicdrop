@@ -1,0 +1,1 @@
+fix: Change multiplier font color to black
