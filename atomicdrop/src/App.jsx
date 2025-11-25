@@ -100,13 +100,17 @@ function App() {
         </div>
         <div className="game-column info-column">
           <GameHistory history={gameHistory} />
+        </div>
+      </main>
+      <div className="provably-fair-container">
+        <div className="game-column">
           <ProvablyFair
             serverSeed={serverSeed} // In a real game, you'd show the hashed seed before the bet
             clientSeed={clientSeed}
             nonce={nonce}
           />
         </div>
-      </main>
+      </div>
     </div>
   );
 }
