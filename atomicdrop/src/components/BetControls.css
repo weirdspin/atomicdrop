@@ -95,3 +95,8 @@
     text-align: right;
     flex-basis: 65%;
 }
+
+#betAmount {
+    flex-basis: auto;
+    width: 10ch;
+}
