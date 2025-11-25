@@ -28,7 +28,6 @@
 }
 
 .control-group input[type="number"],
-.control-group input[type="range"],
 .control-group select {
     flex-basis: 65%;
     padding: 8px;
@@ -38,15 +37,31 @@
     color: #f8f8f2;
 }
 
+.slider-container {
+    flex-basis: 65%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.rows-indicator {
+    min-width: 2ch;
+    text-align: right;
+    font-weight: bold;
+    color: #f8f8f2;
+}
+
 .control-group input[type="range"] {
     -webkit-appearance: none;
-    width: 100%;
+    width: 100%; /* Take full width of its container */
     height: 8px;
     background: #555;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    padding: 0; /* Override default padding */
+    border: none; /* Override default border */
 }
 
 .control-group input[type="range"]::-webkit-slider-thumb {

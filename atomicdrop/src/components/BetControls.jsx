@@ -44,16 +44,18 @@ const BetControls = ({
 
       <div className="control-group">
         <label htmlFor="rows">Rows:</label>
-        <input
-          type="range"
-          id="rows"
-          min="8"
-          max="16"
-          value={rows}
-          onChange={handleRowsChange}
-          disabled={isBetting}
-        />
-        <span>{rows}</span>
+        <div className="slider-container">
+          <input
+            type="range"
+            id="rows"
+            min="8"
+            max="16"
+            value={rows}
+            onChange={handleRowsChange}
+            disabled={isBetting}
+          />
+          <span className="rows-indicator">{rows}</span>
+        </div>
       </div>
 
 
