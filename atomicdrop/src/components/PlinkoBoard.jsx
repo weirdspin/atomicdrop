@@ -81,7 +81,7 @@ const PlinkoBall = ({ id, path, rows, onPegHit }) => {
   );
 };
 
-const PlinkoBoard = ({ rows, balls = [], multipliers = [] }) => {
+const PlinkoBoard = ({ rows, balls = [], multipliers = [], hitBucket }) => {
   const [activePegs, setActivePegs] = useState(new Set());
 
   const handlePegHit = (pegId) => {
@@ -123,11 +123,12 @@ const PlinkoBoard = ({ rows, balls = [], multipliers = [] }) => {
           const fraction = distance / centerIndex;
           const hue = 60 * (1 - fraction);
           const backgroundColor = `hsl(${hue}, 100%, 60%)`;
+          const isHit = index === hitBucket;
 
           return (
             <div
               key={index}
-              className="multiplier-slot"
+              className={`multiplier-slot ${isHit ? 'hit' : ''}`}
               style={{ backgroundColor, boxShadow: `0 0 5px hsl(${hue}, 100%, 60%)` }}
             >
               {multiplier}x

@@ -17,6 +17,7 @@ function App() {
   const [isBetting, setIsBetting] = useState(false);
   const [balls, setBalls] = useState([]); // Array of active balls
   const [multipliers, setMultipliers] = useState([]);
+  const [hitBucket, setHitBucket] = useState(null);
 
   useEffect(() => {
     // Generate an initial server seed when the app loads
@@ -50,6 +51,10 @@ function App() {
 
     // Simulate animation time before updating results
     setTimeout(() => {
+      // Trigger the hit animation on the bucket
+      setHitBucket(bucket);
+      setTimeout(() => setHitBucket(null), 300); // Reset after animation duration
+
       setBalance(prev => prev + winAmount);
 
       const newGameResult = {
@@ -96,6 +101,7 @@ function App() {
             rows={rows}
             balls={balls}
             multipliers={multipliers}
+            hitBucket={hitBucket}
           />
         </div>
         <div className="game-column info-column">
